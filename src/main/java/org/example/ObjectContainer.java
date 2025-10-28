@@ -16,6 +16,31 @@ public class ObjectContainer {
         elements[size++] = element;
     }
 
+    public Object remove(int index) {
+        checkIndex(index);
+        Object removedElement = elements[index];
+        for (int i = index; i < size - 1; i++) {
+            elements[i] = elements[i + 1];
+        }
+        elements[--size] = null;
+        return removedElement;
+    }
+
+    public int size() {
+        return size;
+    }
+
+    private void checkIndex(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+    }
+
+    public Object get(int index) {
+        checkIndex(index);
+        return elements[index];
+    }
+
     private void resize() {
         Object[] newArray = new Object[elements.length * 2];
         System.arraycopy(elements, 0, newArray, 0, elements.length);
